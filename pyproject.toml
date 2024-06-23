@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "ragsperiments"
+version = "0.1.0"
+description = "A scratch repo for playing around with RAG"
+authors = ["Will Langdale"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+langchain = "^0.2.5"
+langchain-chroma = "^0.1.1"
+pypdf = "^4.2.0"
+langchain-community = "^0.2.5"
+langchain-core = "^0.2.9"
+langchain-experimental = "^0.0.61"
+langchain-openai = "^0.1.9"
+chromadb = "^0.5.3"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.10"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+# Ruff defaults mostly taken from https://docs.astral.sh/ruff/configuration/
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+line-length = 88
+indent-width = 4
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    # "D"
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.poe.tasks]
+_lint = "ruff check . --fix"
+_format = "ruff format"
+format = ["_lint", "_format"]
